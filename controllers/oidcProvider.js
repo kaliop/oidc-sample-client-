@@ -72,7 +72,38 @@ const loginRedirect = (req, res) => {
   }
 }
 
+const userToken = (req, res) => {
+  console.log('USER TOKEN', req.body);
+
+  // check the required parameters
+  for (const field of ['client_id', 'client_secret', 'code']) {
+    if (!req.body[field]) {
+      console.error(`missing "${field}" parameter`);
+      return res.sendStatus(400);
+    }
+  }
+
+  // check client config:
+  const
+    {client_id, client_secret, code} = req.body,
+    client = findClient(client_id);
+  if (! client) {
+    console.error('Client ID not found');
+    return res.sendStatus(400);
+  }
+  if (client_secret !== client.client_secret) {
+    console.error('Client Secret mismatch');
+    return res.sendStatus(400);
+  }
+
+  const tokenData = {}; //@TODO: populate with idToken and AccessToken
+
+  return res.json(tokenData);
+};
+
+
 module.exports = {
   userAuthorize,
   loginRedirect,
+  userToken,
 }

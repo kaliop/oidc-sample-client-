@@ -15,6 +15,7 @@ const {
 const {
   userAuthorize,
   loginRedirect,
+  userToken,
 } = require('./controllers/oidcProvider');
 
 const app = express();
@@ -49,6 +50,7 @@ app.get('/logout', localLogout);
 /**** OIDC End points ****/
 app.get('/user/authorize', userAuthorize);
 app.get('/user/loginRedirect', loginRedirect);
+app.post('/user/token', userToken);
 
 /**** END OIDC End points ****/
 
