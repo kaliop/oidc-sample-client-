@@ -1,0 +1,2 @@
+sub ,login ,password  ,family_name ,given_name           ,email                        ,phone     ,birthdate      ,country    ,locality    ,postal_code   ,street_address
+74  ,test  ,123      ,DURANT   ,Jacques François ,fgersqe-4322@yopmail.com   ,0987654321  ,1972-10-12    ,France     ,Annecy   ,74000         ,12 rue des Pavillons

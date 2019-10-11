@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/bulma.min.css" />
+    <link rel="stylesheet" href="/css/bulma-tooltip.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>OpenID Connect Client Demo</title>
+</head>
+
+<body>
+
+<div class="container has-text-centered">
+
+  <img src="/img/openid.png" />
+
+  <div class="column is-4 is-offset-4">
+    <h3 class="title has-text-grey">Local Authentication</h3>
+    <form action="/login" method="post">
+      <div class="box">
+        <div class="field" title="login/password local Authentication">
+          <div class="control">
+            <input class="input is-medium" name="login" type="text" placeholder="Login">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input class="input is-medium" name="password" type="password" placeholder="Password">
+          </div>
+        </div>
+        <button class="button is-block is-info is-medium is-fullwidth">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
