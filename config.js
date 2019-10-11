@@ -8,4 +8,9 @@ module.exports = {
       redirect_logout_uri: 'http://localhost:3000/logout-callback',
     },
   ],
+  jwt: {
+    algo: 'HS256',
+    key: 'changeme',
+    ttl: 3600000, // 1 hour
+  },
 };
