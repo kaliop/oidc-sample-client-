@@ -1,4 +1,6 @@
-const config = require('../config');
+const
+  crypto = require('crypto'),
+  config = require('../config');
 
 // local helper
 const findClient = client_id => config.clients.find(item => item.client_id === client_id);
@@ -34,10 +36,43 @@ const userAuthorize = (req, res) => {
   // store input request parameters into session to be used after authentification
   req.session.oidc_query = req.query;
 
+  // if user is already authenticated, redirect directly to client's redirect_uri
+  if (req.session.user) {
+    return loginRedirect(req, res);
+  }
+
   // redirect to  login form
   return res.redirect('/login');
 };
 
+const loginRedirect = (req, res) => {
+  if (!req.session.user) {
+    console.error('missing user');
+    return res.setStatus(500);
+  }
+
+  if (!req.session.oidc_query) {
+    console.error('missing oidc query data');
+    return res.setStatus(500);
+  }
+
+  try {
+    const code = crypto.randomBytes(20).toString('hex');
+
+    let redirectUri = `${req.session.oidc_query.redirect_uri}?code=${code}`;
+    if (req.session.oidc_query.state) {
+      redirectUri += `&state=${req.session.oidc_query.state}`;
+    }
+
+    return res.redirect(redirectUri);
+
+  } catch (error) {
+    console.error(error);
+    return res.sendStatus(500);
+  }
+}
+
 module.exports = {
   userAuthorize,
+  loginRedirect,
 }
