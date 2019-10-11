@@ -3,6 +3,7 @@
  */
 const
   express = require('express'),
+  bearerToken = require('express-bearer-token'),
   session = require('express-session'),
   sessionstore = require('sessionstore'),
   bodyParser = require('body-parser');
@@ -16,11 +17,15 @@ const {
   userAuthorize,
   loginRedirect,
   userToken,
+  userInfo,
 } = require('./controllers/oidcProvider');
 
 const memoryStorage = require('./services/memoryStorage');
 
 const app = express();
+
+// parse request headers and add the bearer token into `res.token` if present:
+app.use(bearerToken());
 
 // Note this enable to store user session in memory
 // As a consequence, restarting the node process will wipe all sessions data
@@ -55,6 +60,7 @@ app.get('/logout', localLogout);
 app.get('/user/authorize', userAuthorize);
 app.get('/user/loginRedirect', loginRedirect);
 app.post('/user/token', userToken);
+app.get('/api/user', userInfo);
 
 /**** END OIDC End points ****/
 

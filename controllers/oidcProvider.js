@@ -138,8 +138,27 @@ const userToken = (req, res) => {
   }
 };
 
+const userInfo = (req, res) => {
+  const memoryStorage = req.app.get('memoryStorage');
+
+  if (! req.token) {
+    console.error('Unauthorized: missing access Token');
+    return res.sendStatus(401);
+  }
+
+  const data = memoryStorage.find('tokens', req.token);
+
+  if (! data) {
+    console.error('Unauthorized: no matching accessToken found');
+    return res.sendStatus(403);
+  }
+
+  return res.json(data);
+};
+
 module.exports = {
   userAuthorize,
   loginRedirect,
   userToken,
+  userInfo,
 }
