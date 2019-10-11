@@ -18,6 +18,8 @@ const {
   userToken,
 } = require('./controllers/oidcProvider');
 
+const memoryStorage = require('./services/memoryStorage');
+
 const app = express();
 
 // Note this enable to store user session in memory
@@ -37,6 +39,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
+
+app.set('memoryStorage', memoryStorage);
 
 app.get('/', (req, res) => res.render('home', {
   user: req.session.user

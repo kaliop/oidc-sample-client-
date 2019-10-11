@@ -2,6 +2,10 @@ const
   crypto = require('crypto'),
   config = require('../config');
 
+const { getIdToken } = require('../helpers/jwt');
+
+const { formatUserInfo } = require('../helpers/formatters');
+
 // local helper
 const findClient = client_id => config.clients.find(item => item.client_id === client_id);
 
@@ -46,6 +50,8 @@ const userAuthorize = (req, res) => {
 };
 
 const loginRedirect = (req, res) => {
+  const memoryStorage = req.app.get('memoryStorage');
+
   if (!req.session.user) {
     console.error('missing user');
     return res.setStatus(500);
@@ -57,7 +63,19 @@ const loginRedirect = (req, res) => {
   }
 
   try {
-    const code = crypto.randomBytes(20).toString('hex');
+    const
+      {client_id, nonce, scope} = req.session.oidc_query,
+      code = crypto.randomBytes(20).toString('hex'),
+      access_token = crypto.randomBytes(20).toString('hex'),
+      id_token = getIdToken(req.session.user.sub, client_id, nonce);
+
+    memoryStorage.save('tokens', access_token, formatUserInfo(req.session.user, scope));
+
+    memoryStorage.save('codes', code, {
+      client_id,
+      access_token,
+      id_token,
+    });
 
     let redirectUri = `${req.session.oidc_query.redirect_uri}?code=${code}`;
     if (req.session.oidc_query.state) {
@@ -73,7 +91,7 @@ const loginRedirect = (req, res) => {
 }
 
 const userToken = (req, res) => {
-  console.log('USER TOKEN', req.body);
+  const memoryStorage = req.app.get('memoryStorage');
 
   // check the required parameters
   for (const field of ['client_id', 'client_secret', 'code']) {
@@ -96,11 +114,29 @@ const userToken = (req, res) => {
     return res.sendStatus(400);
   }
 
-  const tokenData = {}; //@TODO: populate with idToken and AccessToken
+  try {
+    const data = memoryStorage.find('codes', code);
+    if (!data) {
+      console.error('Code mismatch');
+      return res.sendStatus(400);
+    }
+    if (data.client_id !== client_id) {
+      console.error('Client ID mismatch');
+      return res.sendStatus(400);
+    }
 
-  return res.json(tokenData);
+    memoryStorage.delete('codes', code);
+
+    return res.json({
+      access_token: data.access_token,
+      token_type: 'Bearer',
+      id_token: data.id_token,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.sendStatus(500);
+  }
 };
-
 
 module.exports = {
   userAuthorize,
