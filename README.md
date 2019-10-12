@@ -91,3 +91,9 @@ Fetch the user info that are stored within the in-memory storage, related to the
 ## Step 8: update consents
 
 *checkout [step-08](https://github.com/kaliop/oidc-sample-provider/commit/ffb9b84914122780f4c6ac8239c0043be8378b46)*
+
+## Step 9: Logout propagation
+
+*checkout [step-09](https://github.com/kaliop/oidc-sample-provider/commit/a6fbc237055504bfc65d49c40f4d09fc8a506fb1)*
+
+Implement the logout propagation (see [RP-Initiated Logout](https://openid.net/specs/openid-connect-session-1_0.html#RPLogout)):
