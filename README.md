@@ -54,3 +54,11 @@ Generate a callback redirection with following parameters, according to [specifi
 
 * `code`: random value
 * `state`: value of `state` parameter from input request, if present.
+
+## Step 3: init Token Endpoint
+
+*checkout [step-03](https://github.com/kaliop/oidc-sample-provider/commit/d5e06f35cd40819f95bde9d8ab36f9359b30d812)*
+
+Initiate the [Token Endpoint](https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint):
+* check the mandatory parameters
+* return a JSON object
