@@ -87,3 +87,7 @@ Fetch the user info that are stored within the in-memory storage, related to the
 ## Step 7: Consent form
 
 *checkout [step-07](https://github.com/kaliop/oidc-sample-provider/commit/e0577fee0e610c8a791494d43171dab77653cf8f)*
+
+## Step 8: update consents
+
+*checkout [step-08](https://github.com/kaliop/oidc-sample-provider/commit/ffb9b84914122780f4c6ac8239c0043be8378b46)*
