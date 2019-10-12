@@ -62,3 +62,11 @@ Generate a callback redirection with following parameters, according to [specifi
 Initiate the [Token Endpoint](https://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint):
 * check the mandatory parameters
 * return a JSON object
+
+## Step 4 : Token Endpoint - validate code and return token data
+
+*checkout [step-04](https://github.com/kaliop/oidc-sample-provider/commit/fa8ba4a2dc496ac34bb85346b18a05c12c188508)*
+
+* use a dummy key/value in-memory storage service (use it only for tutorial purpose !) to share some data between the user session and the Access Token Endpoint.
+* generate a random "access_token" value and store it as key with UserInfo as value.
+* generate a random "code" value and store it as key with {access_token, id_token} as value.
