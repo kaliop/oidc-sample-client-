@@ -65,7 +65,7 @@ Initiate the [Token Endpoint](https://openid.net/specs/openid-connect-core-1_0.h
 
 ## Step 4: Token Endpoint - validate code and return token data
 
-*checkout [step-04](https://github.com/kaliop/oidc-sample-provider/commit/fa8ba4a2dc496ac34bb85346b18a05c12c188508)*
+*checkout [step-04](https://github.com/kaliop/oidc-sample-provider/commit/764102de1df30a524380b74479d4b4f9ccd0bb90)*
 
 * use a dummy key/value in-memory storage service (use it only for tutorial purpose !) to share some data between the user session and the Access Token Endpoint.
 * generate a random "access_token" value and store it as key with UserInfo as value.
@@ -73,28 +73,28 @@ Initiate the [Token Endpoint](https://openid.net/specs/openid-connect-core-1_0.h
 
 ## Step 5: generate a valid ID Token
 
-*checkout [step-05](https://github.com/kaliop/oidc-sample-provider/commit/707000a7d4f0f3f3b73d50461ab4a51c984dfa4f)*
+*checkout [step-05](https://github.com/kaliop/oidc-sample-provider/commit/483a6a731fd31e0192c6055726bf8968c2b93825)*
 
 The ID Token must be a valid JWT that follows [OIDC ID Token specifications](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation).
 We use [nJwt](https://github.com/jwtk/njwt) library to generate it.
 
 ## Step 6: UserInfo Endpoint
 
-*checkout [step-06](https://github.com/kaliop/oidc-sample-provider/commit/378e25bbd832a358f7d43b989a1c4f16e122c4a7)*
+*checkout [step-06](https://github.com/kaliop/oidc-sample-provider/commit/5db78081f019a4ab059041e7fb0a160bb155e545)*
 
 Fetch the user info that are stored within the in-memory storage, related to the request's access_token header.
 
 ## Step 7: Consent form
 
-*checkout [step-07](https://github.com/kaliop/oidc-sample-provider/commit/e0577fee0e610c8a791494d43171dab77653cf8f)*
+*checkout [step-07](https://github.com/kaliop/oidc-sample-provider/commit/0b916119ee98a71003222899d8463cbd1984a132)*
 
 ## Step 8: update consents
 
-*checkout [step-08](https://github.com/kaliop/oidc-sample-provider/commit/ffb9b84914122780f4c6ac8239c0043be8378b46)*
+*checkout [step-08](https://github.com/kaliop/oidc-sample-provider/commit/ea196750ff863173ce9d8a458c94d50fc78fa868)*
 
 ## Step 9: Logout propagation
 
-*checkout [step-09](https://github.com/kaliop/oidc-sample-provider/commit/a6fbc237055504bfc65d49c40f4d09fc8a506fb1)*
+*checkout [step-09](https://github.com/kaliop/oidc-sample-provider/commit/aed56286f3b4edda90db8869f1f484cf07a39d7d)*
 
 Implement the logout propagation (see [RP-Initiated Logout](https://openid.net/specs/openid-connect-session-1_0.html#RPLogout)):
 
