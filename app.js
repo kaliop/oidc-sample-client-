@@ -20,6 +20,7 @@ const {
   userInfo,
   checkUserConsent,
   setUserConsent,
+  userLogout,
 } = require('./controllers/oidcProvider');
 
 const memoryStorage = require('./services/memoryStorage');
@@ -66,6 +67,7 @@ app.post('/user/token', userToken);
 app.get('/api/user', userInfo);
 app.get('/user/consent', checkUserConsent);
 app.post('/user/consent', setUserConsent);
+app.get('/user/session/end', userLogout);
 /**** END OIDC End points ****/
 
 // Setting app port

@@ -212,10 +212,18 @@ const userInfo = (req, res) => {
   return res.json(data);
 };
 
+const userLogout = (req, res) => {
+  // Empty session
+  req.session.destroy();
+
+  return res.redirect(req.query.post_logout_redirect_uri);
+};
+
 module.exports = {
   userAuthorize,
   userToken,
   userInfo,
   checkUserConsent,
   setUserConsent,
+  userLogout,
 }
