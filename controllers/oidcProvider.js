@@ -168,6 +168,32 @@ const hasConsent = (client_id, scope, consent) => {
   return true;
 }
 
+const setUserConsent = (req, res) => {
+  const { redirect_uri, client_id, state, scope } = req.session.oidc_query;
+
+  const consentOK = (req.body.consent === 'YES');
+
+  // No Consent => redirect to the client without authentication
+  if (!consentOK) {
+    let redirectUri = `${redirect_uri}?error=consent_required`;
+    if (state) {
+      redirectUri += `&state=${state}`;
+    }
+    return res.redirect(redirectUri);
+  }
+
+  const consent = req.cookies.consent || {};
+  if (! consent[client_id]) {
+    consent[client_id] = {};
+  }
+  for (const item of scope.split(' ')) {
+    consent[client_id][item] = true;
+  }
+  res.cookie('consent', consent, {maxAge: 360000});
+
+  return loginRedirect(req, res);
+};
+
 const userInfo = (req, res) => {
   const memoryStorage = req.app.get('memoryStorage');
 
@@ -191,4 +217,5 @@ module.exports = {
   userToken,
   userInfo,
   checkUserConsent,
+  setUserConsent,
 }
