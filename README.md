@@ -83,3 +83,7 @@ We use [nJwt](https://github.com/jwtk/njwt) library to generate it.
 *checkout [step-06](https://github.com/kaliop/oidc-sample-provider/commit/378e25bbd832a358f7d43b989a1c4f16e122c4a7)*
 
 Fetch the user info that are stored within the in-memory storage, related to the request's access_token header.
+
+## Step 7: Consent form
+
+*checkout [step-07](https://github.com/kaliop/oidc-sample-provider/commit/e0577fee0e610c8a791494d43171dab77653cf8f)*
