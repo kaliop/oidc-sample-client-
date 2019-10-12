@@ -6,7 +6,8 @@ const
   bearerToken = require('express-bearer-token'),
   session = require('express-session'),
   sessionstore = require('sessionstore'),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  cookieParser = require('cookie-parser');
 
 const {
   localLogin,
@@ -15,9 +16,9 @@ const {
 
 const {
   userAuthorize,
-  loginRedirect,
   userToken,
   userInfo,
+  checkUserConsent,
 } = require('./controllers/oidcProvider');
 
 const memoryStorage = require('./services/memoryStorage');
@@ -40,6 +41,8 @@ app.use(session({
 
 app.use(express.static('public'));
 
+app.use(cookieParser());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -58,10 +61,9 @@ app.get('/logout', localLogout);
 
 /**** OIDC End points ****/
 app.get('/user/authorize', userAuthorize);
-app.get('/user/loginRedirect', loginRedirect);
 app.post('/user/token', userToken);
 app.get('/api/user', userInfo);
-
+app.get('/user/consent', checkUserConsent);
 /**** END OIDC End points ****/
 
 // Setting app port

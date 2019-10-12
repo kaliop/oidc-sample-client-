@@ -8,7 +8,7 @@ const localLogin = async (req, res, next) => {
 
     // Redirect to client's loginCallback if we are in oidc context:
     if (req.session.oidc_query) {
-      return res.redirect('/user/loginRedirect');
+      return res.redirect('/user/consent');
     }
 
     return res.redirect('/');

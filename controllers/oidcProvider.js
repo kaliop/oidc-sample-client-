@@ -40,9 +40,9 @@ const userAuthorize = (req, res) => {
   // store input request parameters into session to be used after authentification
   req.session.oidc_query = req.query;
 
-  // if user is already authenticated, redirect directly to client's redirect_uri
+  // if user is already authenticated, check directly user consents
   if (req.session.user) {
-    return loginRedirect(req, res);
+    return checkUserConsent(req, res);
   }
 
   // redirect to  login form
@@ -138,6 +138,36 @@ const userToken = (req, res) => {
   }
 };
 
+const checkUserConsent = (req, res) => {
+  const { client_id, scope } = req.session.oidc_query;
+  if (hasConsent(client_id, scope, req.cookies.consent )) {
+    return loginRedirect(req, res);
+  }
+
+  return res.render('consent', {
+    user: formatUserInfo(req.session.user, scope),
+    redirect_uri: req.session.oidc_query.redirect_uri
+  });
+};
+
+const hasConsent = (client_id, scope, consent) => {
+  if (! consent) {
+    return false;
+  }
+
+  if (! consent[client_id]) {
+    return false;
+  }
+
+  for (const item of scope.split(' ')) {
+    if (! consent[client_id][item]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 const userInfo = (req, res) => {
   const memoryStorage = req.app.get('memoryStorage');
 
@@ -158,7 +188,7 @@ const userInfo = (req, res) => {
 
 module.exports = {
   userAuthorize,
-  loginRedirect,
   userToken,
   userInfo,
+  checkUserConsent,
 }
