@@ -70,3 +70,10 @@ Initiate the [Token Endpoint](https://openid.net/specs/openid-connect-core-1_0.h
 * use a dummy key/value in-memory storage service (use it only for tutorial purpose !) to share some data between the user session and the Access Token Endpoint.
 * generate a random "access_token" value and store it as key with UserInfo as value.
 * generate a random "code" value and store it as key with {access_token, id_token} as value.
+
+## Step 5 : generate a valid ID Token
+
+*checkout [step-05](https://github.com/kaliop/oidc-sample-provider/commit/707000a7d4f0f3f3b73d50461ab4a51c984dfa4f)*
+
+The ID Token must be a valid JWT that follows [OIDC ID Token specifications](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation).
+We use [nJwt](https://github.com/jwtk/njwt) library to generate it.
