@@ -63,7 +63,7 @@ Initiate the [Token Endpoint](https://openid.net/specs/openid-connect-core-1_0.h
 * check the mandatory parameters
 * return a JSON object
 
-## Step 4 : Token Endpoint - validate code and return token data
+## Step 4: Token Endpoint - validate code and return token data
 
 *checkout [step-04](https://github.com/kaliop/oidc-sample-provider/commit/fa8ba4a2dc496ac34bb85346b18a05c12c188508)*
 
@@ -71,9 +71,15 @@ Initiate the [Token Endpoint](https://openid.net/specs/openid-connect-core-1_0.h
 * generate a random "access_token" value and store it as key with UserInfo as value.
 * generate a random "code" value and store it as key with {access_token, id_token} as value.
 
-## Step 5 : generate a valid ID Token
+## Step 5: generate a valid ID Token
 
 *checkout [step-05](https://github.com/kaliop/oidc-sample-provider/commit/707000a7d4f0f3f3b73d50461ab4a51c984dfa4f)*
 
 The ID Token must be a valid JWT that follows [OIDC ID Token specifications](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation).
 We use [nJwt](https://github.com/jwtk/njwt) library to generate it.
+
+## Step 6: UserInfo Endpoint
+
+*checkout [step-06](https://github.com/kaliop/oidc-sample-provider/commit/378e25bbd832a358f7d43b989a1c4f16e122c4a7)*
+
+Fetch the user info that are stored within the in-memory storage, related to the request's access_token header.
