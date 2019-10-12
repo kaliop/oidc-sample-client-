@@ -97,3 +97,12 @@ Fetch the user info that are stored within the in-memory storage, related to the
 *checkout [step-09](https://github.com/kaliop/oidc-sample-provider/commit/a6fbc237055504bfc65d49c40f4d09fc8a506fb1)*
 
 Implement the logout propagation (see [RP-Initiated Logout](https://openid.net/specs/openid-connect-session-1_0.html#RPLogout)):
+
+# Resources
+
+* [Demo OpenID Connect identity client](https://github.com/kaliop/oidc-sample-client)
+* [OpenID Connect Official Specifications](https://openid.net/specs/)
+* [OpenID Connect Official Basic Guide](https://openid.net/specs/openid-connect-basic-1_0.html)
+* [JSON Web Tokens](https://jwt.io/)
+* [Unofficial documentation](https://developer.orange.com/tech_guide/openid-connect-1-0/)
+* [List of certified OpenID Connect libraries](https://openid.net/developers/certified/)
