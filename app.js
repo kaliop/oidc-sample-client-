@@ -12,6 +12,10 @@ const {
   localLogout
 } = require('./controllers/localAuthController');
 
+const {
+  userAuthorize,
+} = require('./controllers/oidcProvider');
+
 const app = express();
 
 // Note this enable to store user session in memory
@@ -40,6 +44,11 @@ app.get('/login', (req, res) => res.render('login'));
 app.post('/login', localLogin);
 
 app.get('/logout', localLogout);
+
+/**** OIDC End points ****/
+app.get('/user/authorize', userAuthorize);
+
+/**** END OIDC End points ****/
 
 // Setting app port
 const port = process.env.PORT || '4000';
