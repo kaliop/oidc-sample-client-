@@ -45,3 +45,12 @@ Check if all the [required request parameters](https://openid.net/specs/openid-c
 * `client_id`: must be found in the knwon allowed clients list (see [default config file](./config.js))
 
 * `redirect_uri`: must match the configured redirect_uri for the client.
+
+## Step 2: Redirect to loginCallback
+
+*checkout [step-02](https://github.com/kaliop/oidc-sample-provider/commit/63c1966ec2ec7b4af8d08a77e116af041e8c9f4e)*
+
+Generate a callback redirection with following parameters, according to [specifications](https://openid.net/specs/openid-connect-core-1_0.html#AuthResponse):
+
+* `code`: random value
+* `state`: value of `state` parameter from input request, if present.
